@@ -1,18 +1,11 @@
 spring:
-  #  Uncomment For Docker Compose
-  #  application:
-  #    name: etick
-  #  datasource:
-  #    driver-class-name: org.postgresql.Driver
-  #    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-  #    username: ${POSTGRES_USERNAME}
-  #    password: ${POSTGRES_PASSWORD}
-
+  application:
+    name: etick
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/ticketing_db
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?sslmode=require&channel_binding=require
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
 
   jpa:
     hibernate:

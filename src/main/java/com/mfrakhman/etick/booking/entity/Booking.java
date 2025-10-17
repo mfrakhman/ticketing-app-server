@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Setter
 @Getter
@@ -15,8 +17,17 @@ public class Booking {
     @Column(name = "booking_id", nullable = false)
     private Long id;
 
+    @Column(name = "customer_name", nullable = false)
+    private String customerName;
+
+    @Column(name = "customer_email", nullable = false)
+    private String customerEmail;
+
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
+
+    @Column(name = "booking_time", nullable = false)
+    private LocalDateTime bookingTime = LocalDateTime.now();
 
     // Many Bookings belong to one Ticket
     @ManyToOne

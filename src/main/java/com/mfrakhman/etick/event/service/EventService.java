@@ -1,5 +1,6 @@
 package com.mfrakhman.etick.event.service;
 
+import com.mfrakhman.etick.event.dto.EventDetailResponse;
 import com.mfrakhman.etick.event.dto.EventRequest;
 import com.mfrakhman.etick.event.dto.EventResponse;
 import com.mfrakhman.etick.event.entity.Event;
@@ -10,7 +11,7 @@ import java.util.Optional;
 public interface EventService {
     List<EventResponse> getAllEvents();
 
-    EventResponse getEventById(Long id);
+    EventDetailResponse getEventById(Long id);
 
     EventResponse createEvent(EventRequest request);
 

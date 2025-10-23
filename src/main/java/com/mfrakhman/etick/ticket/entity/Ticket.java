@@ -23,8 +23,8 @@ public class Ticket {
     @Column(name = "ticket_name", nullable = false)
     private String ticketName;
 
-    @Column(name = "total_ticket", nullable = false)
-    private Integer totalTicket;
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
 
     @Column(name = "price", nullable = false)
     private BigDecimal price;

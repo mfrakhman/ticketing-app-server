@@ -2,6 +2,7 @@ package com.mfrakhman.etick.ticket.service.impl;
 
 import com.mfrakhman.etick.event.entity.Event;
 import com.mfrakhman.etick.event.repository.EventRepository;
+import com.mfrakhman.etick.exception.ResourceNotFoundException;
 import com.mfrakhman.etick.ticket.dto.TicketRequestDto;
 import com.mfrakhman.etick.ticket.dto.TicketResponseDto;
 import com.mfrakhman.etick.ticket.entity.Ticket;
@@ -29,7 +30,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public TicketResponseDto createTicket(TicketRequestDto dto) {
         Event event = eventRepository.findById(dto.getEventId())
-                .orElseThrow(() -> new RuntimeException("Event not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Event", "id", dto.getEventId()));
 
         Ticket ticket = ticketMapper.toEntity(dto, event);
         Ticket savedTicket = ticketRepository.save(ticket);
@@ -47,17 +48,18 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public TicketResponseDto getTicketById(Long id) {
         Ticket ticket = ticketRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Ticket", "id", id));
         return ticketMapper.toDto(ticket);
     }
 
     @Override
     public TicketResponseDto updateTicket(Long id, TicketRequestDto requestDto) {
         Ticket existingTicket = ticketRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Ticket", "id", id));
 
         existingTicket.setTicketName(requestDto.getTicketName());
         existingTicket.setPrice(requestDto.getPrice());
+        existingTicket.setQuantity(requestDto.getQuantity());
 
         Ticket updatedTicket = ticketRepository.save(existingTicket);
         return ticketMapper.toDto(updatedTicket);
@@ -65,6 +67,9 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void deleteTicket(Long id) {
+        if (!ticketRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Ticket", "id", id);
+        }
         ticketRepository.deleteById(id);
     }
 }

@@ -11,7 +11,7 @@ public class TicketMapper {
     public Ticket toEntity(TicketRequestDto dto, Event event) {
         Ticket ticket = new Ticket();
         ticket.setTicketName(dto.getTicketName());
-        ticket.setTotalTicket(dto.getTotalTicket());
+        ticket.setQuantity(dto.getQuantity());
         ticket.setPrice(dto.getPrice());
         ticket.setEvent(event);
         return ticket;
@@ -21,7 +21,7 @@ public class TicketMapper {
         TicketResponseDto dto = new TicketResponseDto();
         dto.setId(ticket.getId());
         dto.setTicketName(ticket.getTicketName());
-        dto.setTotalTicket(ticket.getTotalTicket());
+        dto.setQuantity(ticket.getQuantity());
         dto.setPrice(ticket.getPrice());
         dto.setEventId(ticket.getEvent() != null ? ticket.getEvent().getId() : null);
         return dto;

@@ -1,23 +1,31 @@
 package com.mfrakhman.etick.event.dto;
 
+import com.mfrakhman.etick.ticket.dto.TicketResponseDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
-public class EventRequest {
-    @NotBlank(message = "Event name cannot be blank")
+public class EventDetailResponse {
+
+    @NotBlank
+    private Long id;
+
+    @NotBlank
     private String eventName;
 
-    @NotBlank(message = "Event date cannot be blank")
+    @NotBlank
     private LocalDate eventDate;
 
-    @NotBlank(message = "Event venue cannot be blank")
+    @NotBlank
     private String eventVenue;
 
-    @NotBlank(message = "Event pax cannot be blank")
-    @NotNull(message = "Event pax must be at least 1")
+    @NotBlank
     private Integer eventPax;
+
+    @NotNull
+    private List<TicketResponseDto> tickets;
 }

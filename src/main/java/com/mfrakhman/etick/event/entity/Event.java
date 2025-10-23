@@ -31,6 +31,6 @@ public class Event {
     private Integer eventPax;
 
     // One Event can have many Tickets
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 }

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class TicketResponseDto {
     private Long id;
     private String ticketName;
-    private Integer totalTicket;
+    private Integer quantity;
     private BigDecimal price;
     private Long eventId;
 }
